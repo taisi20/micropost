@@ -1,0 +1,18 @@
+<% if @likes.any? %>
+   <ul class="list-unstyled">
+    <% @likes.each do |like| %>
+      <li class="media">
+        <img class="mr-2 rounded" src="<%= gravatar_url(like.user, { size: 50 }) %>" alt="">
+        <div class="media-body">
+          <div>
+            <%= like.user.name %>
+          </div>
+          <div>
+            <p><%= like.content %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <% paginate @likes %>
+<% end %>
