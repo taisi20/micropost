@@ -20,6 +20,21 @@ class MicropostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
+  def edit
+    @micropost = Micropost.find(params[:id])
+  end
+  
+  def update
+    @micropost = Micropost.find(params[:id])
+    if @micropost.update(micropost_params)
+      flash[:success] = "投稿は正常に更新されました"
+      redirect_to root_url
+    else
+      flash.now[:danger] = "投稿は正常に更新されませんでした"
+      render :edit
+    end
+  end
+  
   private
   def correct_user
     @micropost = current_user.microposts.find_by(id: params[:id])

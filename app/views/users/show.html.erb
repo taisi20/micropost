@@ -9,8 +9,27 @@
       </div>
     </div>
     <%= render "relationships/follow_button", user: @user %>
-  </aside> 
-  <div class="col-sm-8">
+    <% if current_user.name == @user.name %>
+      <%= link_to "Delete", current_user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-block mt-4" %>
+    <% end %>
+  </aside>
+  <div class="col-sm-6 offset-sm-1">
+    <table class="table table-bordared table-striped mt-4 text-xenter">
+      <thead>
+        <tr>
+          <th>ユーザー事故紹介文</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-12">
     <ul class="nav nav-tabs nav-justified mb-3">
      <!--ここにナビをついか -->
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Microposts  <span class="badge badge-secondary"><%= @count_microposts %></span></a></li>

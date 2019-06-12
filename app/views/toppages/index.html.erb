@@ -7,6 +7,9 @@
         </div>
         <%= f.submit "Post", class: "btn btn-primary btn-block" %>
       <% end %>
+      <div class="mt-4">
+        <%= link_to "登録情報編集", edit_user_path(current_user),  class: "btn btn-primary btn-block" %>
+      </div>
     </aside>
     <div class="col-sm-8">
       <%= render "microposts/microposts", microposts: @microposts %>

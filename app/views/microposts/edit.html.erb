@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-sm-10 offset-sm-1">
+    <h1>id: <%= @micropost.id %>の投稿編集ページ</h1>
+
+    <%= form_with(model: @micropost, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :content, "タイトル" %>
+        <%= f.text_field :content, class: "form-control" %>
+      </div>
+      
+      <%= f.submit "投稿", class: "btn btn-primary btn-block" %>
+    <% end %>
+  </div>
+</div>
