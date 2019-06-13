@@ -65,3 +65,5 @@ end
 gem 'carrierwave'
 
 gem 'fog'
+
+gem 'cloudinary'
