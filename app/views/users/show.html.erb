@@ -5,19 +5,20 @@
         <h3 class="card-title"><%= @user.name %></h3>
       </div>
       <div class="card-body">
-        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+        <% if @user.picture %>
+          <img class="rounded img-fluid" src="<%= @user.picture %>" alt="">
+        <% else %>
+          <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+        <% end %>
       </div>
     </div>
     <%= render "relationships/follow_button", user: @user %>
-    <% if current_user.name == @user.name %>
-      <%= link_to "Delete", current_user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-block mt-4" %>
-    <% end %>
   </aside>
   <div class="col-sm-6 offset-sm-1">
     <table class="table table-bordared table-striped mt-4 text-xenter">
       <thead>
         <tr>
-          <th>ユーザー事故紹介文</th>
+          <th class="text-center">ユーザー紹介文</th>
         </tr>
       </thead>
       <tbody>
@@ -38,5 +39,8 @@
       <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= "active" if current_page?(likes_user_path(@user)) %>">Favorites <span class="badge badge-secondary"><%= @count_favorites %></span></a></li>
     </ul>
     <%= render 'microposts/microposts', microposts: @microposts %>
+    <% if current_user.name == @user.name %>
+      <%= link_to "退会する", current_user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-block mt-4 mb-4" %>
+    <% end %>
   </div>
 </div>

@@ -1,10 +1,13 @@
 class User < ApplicationRecord
+  # picture_uploaderの据え付け
+  mount_uploader :picture, PictureUploader
+
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }
-  validates :introduction, length: { maximum: 50 }
+  validates :introduction, length: { maximum: 50 } #自己紹介文の追加
   has_secure_password
   
   has_many :microposts, dependent: :destroy
