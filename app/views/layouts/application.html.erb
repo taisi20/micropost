@@ -19,7 +19,7 @@
 
   <body>
     <%= render "layouts/navbar" %>
-    <% if "users/index" %>
+    <% if current_page?(users_path) %>
       <%= render "layouts/flash_messages" %>
       <%= yield %>
     <% else %>
