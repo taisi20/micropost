@@ -1,7 +1,11 @@
 <ul class="list-unstyled">
   <% microposts.each do |micropost| %>
     <li class="media mb-3">
-      <img class="mr-3 rounded" src="<%= gravatar_url(micropost.user, { size: 50}) %>">
+      <% if micropost.user.picture? %>
+        <a href="<%= user_path(micropost.user) %>"><img class="mr-3 rounded" src="<%= micropost.user.picture %>" width="50" height="50"></a>
+      <% else %>
+        <a href="<%= user_path(micropost.user) %>"><img class="mr-3 rounded" src="<%= gravatar_url(micropost.user, { size: 50}) %>"></a>
+      <% end %>
       <div class="media-body">
         <div>
           <%= link_to micropost.user.name, user_path(micropost.user) %><span class="text-muted">post at<%= micropost.created_at %></span>

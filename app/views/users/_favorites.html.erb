@@ -2,7 +2,11 @@
    <ul class="list-unstyled">
     <% @likes.each do |like| %>
       <li class="media">
-        <img class="mr-2 rounded" src="<%= gravatar_url(like.user, { size: 50 }) %>" alt="">
+        <% if like.user.picture %>
+          <a href="<%= user_path(like.user) %>"><img class="mr-3 rounded" src="<%= like.user.picture.to_s %>" width="50" height="50"></a>
+        <% else %>
+          <a href="<%= user_path(like.user) %>"><img class="mr-3 rounded" src="<%= gravatar_url(like.user, { size: 50 }) %>" alt=""></a>
+        <% end %>
         <div class="media-body">
           <div>
             <%= like.user.name %>

@@ -38,7 +38,7 @@
       <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= "active" if current_page?(followers_user_path(@user)) %>">Followers <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
       <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= "active" if current_page?(likes_user_path(@user)) %>">Favorites <span class="badge badge-secondary"><%= @count_favorites %></span></a></li>
     </ul>
-    <%= render 'microposts/microposts', microposts: @microposts %>
+    <%= render 'microposts/microposts', microposts: @microposts, user: @user %>
     <% if current_user.name == @user.name %>
       <%= link_to "退会する", current_user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-block mt-4 mb-4" %>
     <% end %>

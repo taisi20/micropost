@@ -1,26 +1,64 @@
 <% if logged_in? %>
   <div class="row">
-    <aside class="col-sm-4">
-      <%= form_with(model: @micropost, local: true) do |f| %>
-        <div class="form-group">
-          <%= f.text_area :content, class: "form-control", rows: 5 %>
+    <div class="col-md-4">
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title text-center"><%= @user.name %></h3>
+          </div>
+          <div class="card-body">
+            <% if @user.picture? %>
+              <img class="rounded img-fluid" src="<%= @user.picture %>" alt="">
+            <% else %>
+              <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+            <% end %>
+            <div class="mt-1">
+              <a href="<%= user_path(@user) %>"><span class="badge badge-secondary ml-1">Microposts <%= @count_microposts %></span></a>
+              <a href="<%= followings_user_path(@user) %>"><span class="badge badge-secondary ml-1">Follow <%= @count_followings %></span></a>
+              <a href="<%= followers_user_path(@user) %>"><span class="badge badge-secondary ml-1">Follower <%= @count_followers %></span></a>
+            </div>
+            <table class="table table-bordared table-striped mt-4 text-xenter">
+              <thead>
+                <tr>
+                  <th class="text-center">ユーザー紹介文</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center"><%= @user.introduction %></td>
+                </tr>
+              </tbody>
+            </table>
+            <% if current_user %>
+              <div class="mt-4">
+                <%= link_to "登録情報編集", edit_user_path(current_user),  class: "btn btn-primary btn-block" %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <%= f.submit "Post", class: "btn btn-primary btn-block" %>
-      <% end %>
-      <div class="mt-4 mb-4">
-        <%= link_to "登録情報編集", edit_user_path(current_user),  class: "btn btn-primary btn-block" %>
       </div>
-    </aside>
-    <div class="col-sm-8">
+    </div>
+    <div class="col-md-8">
+      <%= form_with(model: @micropost, local: true) do |f| %>
+        <div class="form-group mt-4 text-center">
+          <%= f.label :content, "New Post" %>
+          <%= f.text_area :content, class: "form-control", rows: 8 %>
+        </div>
+        <%= f.submit "New Post", class: "btn btn-primary btn-block mb-4" %>
+      <% end %>
+      <h3 class="text-center">Microposts</h3>
       <%= render "microposts/microposts", microposts: @microposts %>
     </div>
-  </div>
 <% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the Microposts</h1>
-      <%= link_to "Sign up naw!", signup_path, class: "btn btn-lg btn-primary" %>
+  <div class="col-md-6">
+    <div class="center jumbotron">
+      <div class="text-center">
+        <h1>Welcome to the Microposts</h1>
+          <%= link_to "Sign up naw!", signup_path, class: "btn btn-lg btn-primary" %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
+
 
