@@ -62,8 +62,8 @@ group :production do
   gem 'pg', '>= 0.18', '< 2.0'
 end
 
+#画像アップロード用
 gem 'carrierwave'
-
 gem 'fog'
-
+#画像アップロード用の外部ストレージ用
 gem 'cloudinary'
