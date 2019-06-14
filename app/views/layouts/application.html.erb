@@ -19,9 +19,14 @@
 
   <body>
     <%= render "layouts/navbar" %>
-    <div class="container">
+    <% if "users/index" %>
       <%= render "layouts/flash_messages" %>
       <%= yield %>
-    </div>
+    <% else %>
+     <div class="container">
+      <%= render "layouts/flash_messages" %>
+      <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>
